@@ -16,17 +16,38 @@ ApplicationWindow {
             id: sys
         }
 
+        Turbulence {
+            id: turb
+            enabled: true
+            system: sys
+
+            anchors.fill: parent
+            strength: 1
+            //NumberAnimation on strength{from: 16; to: 64; easing.type: Easing.InOutBounce; duration: 1800; loops: -1}
+        }
+
+        Gravity {
+            id: gravity
+            enabled: true
+            system: sys
+
+            anchors.fill: parent
+            magnitude: 2
+            angle: -90
+        }
+
         Emitter {
             system:sys
-            //            height: parent.height
+//            height: parent.height
             width: parent.width
             anchors.bottom: parent.bottom
-            emitRate: 0.5
+//            anchors.fill: parent
+            emitRate: 3
             lifeSpan: 600000
-            velocity: PointDirection {x:0; y:-2; yVariation: 1}
+            velocity: PointDirection {x:0; y:-32; yVariation: 1}
             size: 36
             sizeVariation: 29
-            startTime: 600000
+            startTime: 30000
         }
 
         ShaderEffectSource {
@@ -112,15 +133,14 @@ ApplicationWindow {
             //! [fragment]
 
         }
-    }
+        Rectangle {
+            id: colorOverlay
+            anchors.fill: parent
 
-    Rectangle {
-        id: colorOverlay
-        anchors.fill: parent
-
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#804682B4" }
-            GradientStop { position: 1.0; color: "#f0000020" }
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#804682B4" }
+                GradientStop { position: 1.0; color: "#f0000020" }
+            }
         }
     }
 }
